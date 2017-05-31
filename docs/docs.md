@@ -59,7 +59,7 @@ Pronalaženje simova se takođe može implemntirati korišćenjem više funkcija
 
 Dinamičko programiranje je pojam koji se susreće u mnogim naukama kao što su informatika, matematika, ekonomija i predstavlja metod za rešavanje kompleksnog problema razbijanjem tog problema na više jednostavnijih potproblema i korišćenje njihovih rešenja u cilju traženja optimalnog rešenja celokupnog problema.
 
-Kako bi izračunali vertikalni sim, za svaki piksel u redu računamo zbir njegove energije i najmanje energije jednog od tri piksela iznad njega. Tako će svaki piksel imati najmanju vrednost energije koja je potrebna da bi se došlo do njega. 
+Kako bi izračunali vertikalni sim, za svaki piksel u redu računamo zbir njegove energije i najmanje energije jednog od tri piksela iznad njega. Tako će svaki piksel imati najmanju vrednost energije koja je potrebna da bi se došlo do njega. Sledeća slika opisuje postupak: 
 
 ![Dznamic programming](images/dynamic.png)
 
@@ -78,6 +78,26 @@ Prvo rešenje nije idealno i ima dosta slučajeva u kojima ne daje dobre rezulta
 
 Takođe, prilikom brisanja više simova se može doći u situaciju da ne postoji jednak broj piksela po redu koje treba obrisati, što nameće ispitivanje disjunktnosti simova.
 
-Drugo rešenje je sporo rešenje jer se za razliku od prvog gde se energija preračunava tek nakon brisanja n simova energija preračunava nakon brisanja svakog sima. S obzirom da nije previše sporo i da daje rezultate u razumno dugom vremenu ovo rešenje je implmentirano. 
+Drugo rešenje je sporo rešenje jer se za razliku od prvog gde se energija preračunava tek nakon brisanja n simova energija preračunava nakon brisanja svakog sima. S obzirom da nije previše sporo i da daje rezultate u razumno dugom vremenu ovo rešenje je implmentirano. Slika koja sledi ilustruje simove koji će biti obrisani: 
+
+![seams](images/seams.png)
 
 ## Implementacija
+
+Aplikacija kao i svaka za obradu slika omogućava učitavanje/čuvanje slike, klasičnu promenu veličine i sl. Pored toga, aplikacija omogućava korisniku tri pogleda:
+
+1. Jednostavan pogled gde je prikazana slika koja je učitana
+2. Energy pogled na kom su prikazane slike koje su nastale od osnovne, zatim konvertovane u crno belu sliku, zatim izmenjene konvolucionim filterom za detekciju ivica korišćenjem Krish, Prewitt, Sobel matrice respektivno.
+3. Seam carving pogled koji je predviđen za promenu veličine slike na osnovu sadržaja korišćenjem seam carving algoritma. U gornjem desnom uglu aplikacije se nalaze opcije koje su na raspolaganju korisniku: promena matrice koja će se koristiti i broj piksela koji će se ukloniti seam carving operacijom
+
+U nastavku se nalaze linkovi koji vode do delova koda koji implementiraju gore naveden postupak:
+
+1. [kovenrtovanje slike u crno belu](https://github.com/MasaDjordjevic/pi-projekat/blob/master/app/SeamCarving/Filters/CoreFilters.cs#L14)
+2. [konvolucioni filter](https://github.com/MasaDjordjevic/pi-projekat/blob/master/app/SeamCarving/Filters/ConvFilters.cs#L167)
+3. [primena konvolucionog filtera za detekciju ivica](https://github.com/MasaDjordjevic/pi-projekat/blob/master/app/SeamCarving/Filters/ConvFilters.cs#L260
+)
+4. [pronalaženje simova koji će biti obrisani](https://github.com/MasaDjordjevic/pi-projekat/blob/master/app/SeamCarving/Views/SplitViewStrategies/SeamCravingStrategy.cs#L93)
+5. [smer za brisanje simova](https://github.com/MasaDjordjevic/pi-projekat/blob/master/app/SeamCarving/Views/SplitViewStrategies/SeamCravingStrategy.cs#L166)
+5. [brisanje simova](https://github.com/MasaDjordjevic/pi-projekat/blob/master/app/SeamCarving/Views/SplitViewStrategies/SeamCravingStrategy.cs#L195)
+
+> U kodu se sve operacije koje menjaju bitmapu nalaze u `unsafe {}` bloku kako se ne bi izvršavale na CLR-u (*common language runtime*) što omogućava znatno brže izvršavanje ovih operacija.
