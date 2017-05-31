@@ -62,7 +62,7 @@ Dinamičko programiranje je pojam koji se susreće u mnogim naukama kao što su 
 
 Kako bi izračunali vertikalni sim, za svaki piksel u redu računamo zbir njegove energije i najmanje energije jednog od tri piksela iznad njega. Tako će svaki piksel imati najmanju vrednost energije koja je potrebna da bi se došlo do njega. Sledeća slika opisuje postupak: 
 
-![Dznamic programming](images/dynamic.png)
+![Dznamic programming](images/dynamic2.png)
 
 ### Brisanje simova
 
