@@ -22,7 +22,7 @@ Promena veličine slike na osnovu sadržaja predstavlja uklanjanje (dodavanje) p
 
 Seam carving (*rezbarenje šavova*) je algoritam za promenu veličine slike na osnosvu njenog sadržaja (eng. *algorithm for content-aware image resizing*) koji su razvili Shai Avidan i Ariel Shamir. Ovaj algoritam nalazi simove (eng. seams) tj. puteve koji su najmanje važni na slici i uklanja ih kako bi smanjio veličinu slike. Simovi se mogu tražiti i horizontalno i vertikalno odnosno putevi mogu ići sa vrha slike ka dnu ili sa leve strane ka desnoj. U nastavku je opisan algoritam koji uklanja piksele i simove traži vertikalno.
 
-![Cilj](images/landscape.png)
+![landscape](images/landscape.png)
 
 ## Koraci
 
@@ -33,13 +33,13 @@ Algoritam se može opisati kroz sledeće korake gde će svaki biti objašnjen u 
 3.	Obrisati minimalne simove
 4.	Ponovljati korake 1-3 sve dok željeni broj simova nije uklonjen
 
-![Cilj](images/steps.png)
+![steps](images/steps.png)
 
 ### Energija piskela
 
 Mnoge funkcije se mogu koristiti za izračunavanje energije piksela i ne postoji optimalna odnosno određene funkcije daju bolje rezultate sa određenim slikama. U ovom slučaju su korišćeni algoritmi za detekciju ivica koji koriste konvlucione matrice za izračunavanje: Kirsch, Prewitt i Sobel. Pre primene filtera slika se prevodi u crno belu sliku.
 
-![Cilj](images/matrices.png)
+![Matrices](images/matrices.png)
 
 #### Konvolucioni filteri
 
@@ -60,6 +60,8 @@ Pronalaženje simova se takođe može implemntirati korišćenjem više funkcija
 Dinamičko programiranje je pojam koji se susreće u mnogim naukama kao što su informatika, matematika, ekonomija i predstavlja metod za rešavanje kompleksnog problema razbijanjem tog problema na više jednostavnijih potproblema i korišćenje njihovih rešenja u cilju traženja optimalnog rešenja celokupnog problema.
 
 Kako bi izračunali vertikalni sim, za svaki piksel u redu računamo zbir njegove energije i najmanje energije jednog od tri piksela iznad njega. Tako će svaki piksel imati najmanju vrednost energije koja je potrebna da bi se došlo do njega. 
+
+![Dznamic programming](images/dynamic.png)
 
 ### Brisanje simova
 
