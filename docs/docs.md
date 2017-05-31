@@ -1,6 +1,16 @@
 
 # Promena veličine slike na osnovu sadržaja
 
+- [Cilj](#)
+- [Seam Carving algoritam](#)
+- [Koraci](#)
+	- [Energija piskela](#)
+		- [Konvolucioni filteri](#)
+		- [Konvolucioni filteri za traženje ivica](#)
+	- [Pronalaženje minimalnih simova](#)
+	- [Brisanje simova](#)
+- [Implementacija](#)
+
 ## Cilj
 
 Algoritmi koji menjanju veličinu slike na osnovu njenog sadržaja su nastali kao odgovor na problem prikazivanja slika na uređijama raznih veličina (telefoni, tableti, ekrani, projektori...). Ova potreba je prisutna već neko i vreme i recimo internet stranice podržavaju dinamičke promene rasporeda elemenata na starnici i teksta ali ne i slika. Klasično skaliranje nije dovoljno jer zanemaruje sadržaj slike. Odsecanje slike (eng. *cropping*) je ograničeno jer uklanja samo piksele na ivicama slike. Veća efikasnost bi se postigla kada bi se posmatrao sadržaj slike a ne samo njena geometrija.
