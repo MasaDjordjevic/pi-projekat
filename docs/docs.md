@@ -13,8 +13,9 @@
 
 ## Cilj
 
-Algoritmi koji menjanju veličinu slike na osnovu njenog sadržaja su nastali kao odgovor na problem prikazivanja slika na uređijama raznih veličina (telefoni, tableti, ekrani, projektori...). Ova potreba je prisutna već neko i vreme i internet stranice podržavaju dinamičke promene rasporeda elemenata na starnici i teksta ali ne i slika. Klasično skaliranje nije dovoljno jer zanemaruje sadržaj slike. Odsecanje slike (eng. *cropping*) je ograničeno jer uklanja samo piksele na ivicama slike. Veća efikasnost bi se postigla kada bi se posmatrao sadržaj slike a ne samo njena geometrija.
-Promena veličine slike na osnovu sadržaja predstavlja uklanjanje (dodavanje) piksela koji imaju manje značenje za sam sadržaj slike. Na taj način na smanjenoj slici ostaju pikseli koji su važni odnosno sadržaj slike koji je bitano prikazati, gde pritom veličina samih objekata na slici nije smanjena.
+Algoritmi koji menjanju veličinu slike na osnovu njenog sadržaja su nastali kao odgovor na problem prikazivanja slika na uređijama raznih veličina (telefoni, tableti, ekrani, projektori...). Ova potreba je prisutna već neko vreme i internet stranice podržavaju dinamičke promene rasporeda elemenata na starnici i teksta ali ne i slika. Klasično skaliranje nije dovoljno jer zanemaruje sadržaj slike. Odsecanje slike (eng. *cropping*) je ograničeno jer uklanja samo piksele na ivicama slike. Veća efikasnost bi se postigla kada bi se posmatrao sadržaj slike a ne samo njena geometrija.
+Promena veličine slike na osnovu sadržaja predstavlja uklanjanje (dodavanje) piksela koji nose manje značenje. Porepoznavanje objekata i bitinih elemenata slike omogućuje eleminisanje nevažnih piskela koji nisu esencijalni za sam sadržaj slike.
+
 
 ![Cilj](images/treeProgress.png)
 
@@ -48,14 +49,14 @@ Konvoluciona matrica je matrica 3×3 ili 5×5 koja služi za realizaciju konvolu
 
 #### Konvolucioni filteri za traženje ivica
 
-Konvolucioni filteri za traženje ivica prvo napravi kopiju slike. Zatim primeni odgovarajući filter nad originalom i nad kopijom. Ako označimo rezultate P i P2, svaki piksel u rezulujućoj slici će imati vrednost: 
+Konvolucioni filteri za traženje ivica prvo naprave kopiju slike. Zatim primene odgovarajući filter nad originalom i nad kopijom. Ako označimo rezultate P i P2, svaki piksel u rezultujućoj slici će imati vrednost: 
 ```
 Math.Sqrt((p[i,j]*p[i,j]) + (p2[i,j] * p2[i,j]))
 ```
 
 ### Pronalaženje minimalnih simova
 
-Pronalaženje simova se takođe može implemntirati korišćenjem više funkcija kao što su Dijkstrin algoritam, dinamičko programiranje, pohlepni algoritam (eng. *greedy algorithm*) i sl. U nastavku će biti objašnjen pristup koji koristi dinamičko programiranje.
+Pronalaženje simova se takođe može implemntirati korišćenjem više funkcija kao što su Dijkstrin algoritam, dinamičko programiranje, pohlepni algoritam (eng. *greedy algorithm*) i dr. U nastavku će biti objašnjen pristup koji koristi dinamičko programiranje.
 
 Dinamičko programiranje je pojam koji se susreće u mnogim naukama kao što su informatika, matematika, ekonomija i predstavlja metod za rešavanje kompleksnog problema razbijanjem tog problema na više jednostavnijih potproblema i korišćenje njihovih rešenja u cilju traženja optimalnog rešenja celokupnog problema.
 
@@ -74,11 +75,9 @@ S obzirom da je račuananje energije slike skupa operacija nameće se sledeći i
 	3. Obrisati prvih n sa liste	
 2. Brisanje jednog sima i ponovno preračunavanje 
 
-Prvo rešenje nije idealno i ima dosta slučajeva u kojima ne daje dobre rezultate, npr:
+Prvo rešenje nije idealno i ima dosta slučajeva u kojima ne daje dobre rezultate. Takođe, prilikom brisanja više simova se može doći u situaciju da ne postoji jednak broj piksela po redu koje treba obrisati, što nameće ispitivanje disjunktnosti simova.
 
-Takođe, prilikom brisanja više simova se može doći u situaciju da ne postoji jednak broj piksela po redu koje treba obrisati, što nameće ispitivanje disjunktnosti simova.
-
-Drugo rešenje je sporo rešenje jer se za razliku od prvog gde se energija preračunava tek nakon brisanja n simova energija preračunava nakon brisanja svakog sima. S obzirom da nije previše sporo i da daje rezultate u razumno dugom vremenu ovo rešenje je implmentirano. Slika koja sledi ilustruje simove koji će biti obrisani: 
+Drugo rešenje je sporo rešenje jer se za razliku od prvog gde se energija preračunava tek nakon brisanja n simova energija preračunava nakon brisanja svakog sima. S obzirom da nije previše sporo i da daje rezultate u razumno dugom vremenskom periodu ovo rešenje je implmentirano. Slika koja sledi prikazuje simove koji će biti obrisani: 
 
 ![seams](images/seams.png)
 
@@ -90,11 +89,11 @@ Aplikacija kao i svaka za obradu slika omogućava učitavanje/čuvanje slike, kl
 2. Energy pogled na kom su prikazane slike koje su nastale od osnovne, zatim konvertovane u crno belu sliku, zatim izmenjene konvolucionim filterom za detekciju ivica korišćenjem Krish, Prewitt, Sobel matrice respektivno.
 3. Seam carving pogled koji je predviđen za promenu veličine slike na osnovu sadržaja korišćenjem seam carving algoritma. U gornjem desnom uglu aplikacije se nalaze opcije koje su na raspolaganju korisniku: promena matrice koja će se koristiti i broj piksela koji će se ukloniti seam carving operacijom
 
-U nastavku se nalaze linkovi koji vode do delova koda koji implementiraju gore naveden postupak:
+U nastavku su linkovi koji vode do delova koda koji implementiraju gore naveden postupak:
 
 1. [kovenrtovanje slike u crno belu](https://github.com/MasaDjordjevic/pi-projekat/blob/master/app/SeamCarving/Filters/CoreFilters.cs#L14)
 2. [konvolucioni filter](https://github.com/MasaDjordjevic/pi-projekat/blob/master/app/SeamCarving/Filters/ConvFilters.cs#L167)
-3. [primena konvolucionog filtera za detekciju ivica](https://github.com/MasaDjordjevic/pi-projekat/blob/master/app/SeamCarving/Filters/ConvFilters.cs#L260
+3. [konvolucionoi filter za detekciju ivica](https://github.com/MasaDjordjevic/pi-projekat/blob/master/app/SeamCarving/Filters/ConvFilters.cs#L260
 )
 4. [pronalaženje simova koji će biti obrisani](https://github.com/MasaDjordjevic/pi-projekat/blob/master/app/SeamCarving/Views/SplitViewStrategies/SeamCravingStrategy.cs#L93)
 5. [smer za brisanje simova](https://github.com/MasaDjordjevic/pi-projekat/blob/master/app/SeamCarving/Views/SplitViewStrategies/SeamCravingStrategy.cs#L166)
