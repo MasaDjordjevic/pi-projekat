@@ -13,12 +13,16 @@
 
 ## Cilj
 
-Algoritmi koji menjanju veličinu slike na osnovu njenog sadržaja su nastali kao odgovor na problem prikazivanja slika na uređijama raznih veličina (telefoni, tableti, ekrani, projektori...). Ova potreba je prisutna već neko i vreme i recimo internet stranice podržavaju dinamičke promene rasporeda elemenata na starnici i teksta ali ne i slika. Klasično skaliranje nije dovoljno jer zanemaruje sadržaj slike. Odsecanje slike (eng. *cropping*) je ograničeno jer uklanja samo piksele na ivicama slike. Veća efikasnost bi se postigla kada bi se posmatrao sadržaj slike a ne samo njena geometrija.
+Algoritmi koji menjanju veličinu slike na osnovu njenog sadržaja su nastali kao odgovor na problem prikazivanja slika na uređijama raznih veličina (telefoni, tableti, ekrani, projektori...). Ova potreba je prisutna već neko i vreme i internet stranice podržavaju dinamičke promene rasporeda elemenata na starnici i teksta ali ne i slika. Klasično skaliranje nije dovoljno jer zanemaruje sadržaj slike. Odsecanje slike (eng. *cropping*) je ograničeno jer uklanja samo piksele na ivicama slike. Veća efikasnost bi se postigla kada bi se posmatrao sadržaj slike a ne samo njena geometrija.
 Promena veličine slike na osnovu sadržaja predstavlja uklanjanje (dodavanje) piksela koji imaju manje značenje za sam sadržaj slike. Na taj način na smanjenoj slici ostaju pikseli koji su važni odnosno sadržaj slike koji je bitano prikazati, gde pritom veličina samih objekata na slici nije smanjena.
+
+![Cilj](images/treeProgress.png)
 
 ## Seam Carving algoritam
 
 Seam carving (*rezbarenje šavova*) je algoritam za promenu veličine slike na osnosvu njenog sadržaja (eng. *algorithm for content-aware image resizing*) koji su razvili Shai Avidan i Ariel Shamir. Ovaj algoritam nalazi simove (eng. seams) tj. puteve koji su najmanje važni na slici i uklanja ih kako bi smanjio veličinu slike. Simovi se mogu tražiti i horizontalno i vertikalno odnosno putevi mogu ići sa vrha slike ka dnu ili sa leve strane ka desnoj. U nastavku je opisan algoritam koji uklanja piksele i simove traži vertikalno.
+
+![Cilj](images/landscape.png)
 
 ## Koraci
 
@@ -29,10 +33,13 @@ Algoritam se može opisati kroz sledeće korake gde će svaki biti objašnjen u 
 3.	Obrisati minimalne simove
 4.	Ponovljati korake 1-3 sve dok željeni broj simova nije uklonjen
 
+![Cilj](images/steps.png)
+
 ### Energija piskela
 
 Mnoge funkcije se mogu koristiti za izračunavanje energije piksela i ne postoji optimalna odnosno određene funkcije daju bolje rezultate sa određenim slikama. U ovom slučaju su korišćeni algoritmi za detekciju ivica koji koriste konvlucione matrice za izračunavanje: Kirsch, Prewitt i Sobel. Pre primene filtera slika se prevodi u crno belu sliku.
 
+![Cilj](images/matrices.png)
 
 #### Konvolucioni filteri
 
