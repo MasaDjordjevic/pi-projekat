@@ -1,15 +1,15 @@
 
 # Promena veličine slike na osnovu sadržaja
 
-- [Cilj](#Cilj)
-- [Seam Carving algoritam](#Seam Carving algoritam)
-- [Koraci](#Koraci)
-	- [Energija piskela](#Energija piskela)
-		- [Konvolucioni filteri](#)
-		- [Konvolucioni filteri za traženje ivica](#)
-	- [Pronalaženje minimalnih simova](#)
-	- [Brisanje simova](#)
-- [Implementacija](#)
+- [Cilj](#cilj)
+- [Seam Carving algoritam](#seam-carving-algoritam)
+- [Koraci](#koraci)
+	- [Energija piskela](#energija-piskela)
+		- [Konvolucioni filteri](#konvolucioni-filteri)
+		- [Konvolucioni filteri za traženje ivica](#konvolucioni-filteri-za-traženje-ivica)
+	- [Pronalaženje minimalnih simova](#pronalaženje-minimalnih-simova)
+	- [Brisanje simova](#brisanje-simova)
+- [Implementacija](#implementacija)
 
 ## Cilj
 
